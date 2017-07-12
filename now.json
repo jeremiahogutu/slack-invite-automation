@@ -1,0 +1,4 @@
+{
+  "name": "freeCodeCamp London Slack",
+  "dotenv": ".env.production"
+}
