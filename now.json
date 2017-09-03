@@ -1,4 +1,8 @@
 {
   "name": "freeCodeCamp London Slack",
-  "dotenv": ".env.production"
+  "alias": [
+    "freecodecamplondon.ca",
+    "www.freecodecamplondon.ca"
+  ],
+  "dotenv": ".production.env"
 }
