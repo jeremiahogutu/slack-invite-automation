@@ -562,6 +562,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+now@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/now/-/now-7.4.0.tgz#2da0d236fd6d6d9277e9c5cf4ba87ea455788627"
+
 oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
