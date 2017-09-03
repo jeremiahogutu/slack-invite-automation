@@ -19,9 +19,8 @@ jobs:
 
     steps:
       - checkout
-
-      - run: command: yarn global add now
-      - run: command: yarn test
+      - run: yarn global add now
+      - run: yarn test
 
       # Deploy production
       - deploy:
