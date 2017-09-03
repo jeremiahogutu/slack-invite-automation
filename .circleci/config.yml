@@ -26,6 +26,6 @@ jobs:
       # Deploy production
       - deploy:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "circleci" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               ./node_modules/.bin/now -t ${NOW_TOKEN}; ./node_modules/.bin/now -t ${NOW_TOKEN} alias;
             fi
