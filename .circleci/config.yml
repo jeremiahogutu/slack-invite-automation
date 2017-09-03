@@ -1,31 +1,31 @@
 # https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1
 
-version: 2
+version: 2.0
+
 jobs:
   build:
     docker:
       - image: circleci/node:8.4.0
 
-    working_directory: ~/repo
+    environment:
+       BASH_ENV: ~/.bashrc
 
-    branches:
-      ignore:
-        - develop
-        - /feature-.*/
+    working_directory: ~/repo
 
     steps:
       - checkout
-
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: yarn
-      - run: mkdir ~/.npm-global
-      - run: npm config set prefix '~/.npm-global'
-      - run: PATH=$PATH:~/.npm-global
-      - run: npm i -g now
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run: yarn test
 
       # Deploy production
       - deploy:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ];
-              then now -t ${NOW_TOKEN}; now -t ${NOW_TOKEN} alias;
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./node_modules/.bin/now -t ${NOW_TOKEN}; ./node_modules/.bin/now -t ${NOW_TOKEN} alias;
             fi

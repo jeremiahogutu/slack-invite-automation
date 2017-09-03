@@ -1,5 +1,6 @@
 {
   "name": "freeCodeCamp London Slack",
+  "type": "npm",
   "alias": [
     "freecodecamplondon.ca",
     "www.freecodecamplondon.ca"
