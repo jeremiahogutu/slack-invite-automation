@@ -1,26 +1,31 @@
 # https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1
 
-machine:
-  environment:
-    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-  node:
-    version: 8.4.0
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:14.04
+      - image: node:8.4.0
 
-dependencies:
-  override:
-    - yarn
-  cache_directories:
-    - ~/.cache/yarn
-  pre:
-    - yarn global add now
+    environment:
+      PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
-test:
-  override:
-    - yarn test
+    working_directory: ~/app
 
-deployment:
-  production:
-    branch: master
-    commands:
-      - now -t ${NOW_TOKEN}
-      - now -t ${NOW_TOKEN} alias
+    branches:
+      ignore:
+        - develop
+        - /feature-.*/
+
+    steps:
+      - checkout
+
+      - run: command: yarn global add now
+      - run: command: yarn test
+
+      # Deploy production
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ];
+              then now -t ${NOW_TOKEN}; now -t ${NOW_TOKEN} alias;
+            fi
