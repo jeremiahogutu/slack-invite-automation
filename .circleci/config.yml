@@ -19,6 +19,7 @@ jobs:
       - run: yarn
       - run: mkdir ~/.npm-global
       - run: npm config set prefix '~/.npm-global'
+      - run: PATH=$PATH:~/.npm-global
       - run: npm i -g now
       - run: yarn test
 
