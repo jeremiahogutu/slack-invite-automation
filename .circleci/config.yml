@@ -4,13 +4,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
-      - image: node:8.4.0
+      - image: circleci/node:8.4.0
 
     environment:
       PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
-    working_directory: ~/app
+    working_directory: ~/repo
 
     branches:
       ignore:
@@ -19,6 +18,8 @@ jobs:
 
     steps:
       - checkout
+
+      - run: yarn
       - run: yarn global add now
       - run: yarn test
 
