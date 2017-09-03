@@ -17,7 +17,7 @@ jobs:
       - checkout
 
       - run: yarn
-      - run: yarn global add now
+      - run: npm i -g now
       - run: yarn test
 
       # Deploy production
